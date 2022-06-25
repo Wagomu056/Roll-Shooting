@@ -2,11 +2,12 @@
 // Created by 東口拓也 on 2022/06/22.
 //
 
-#include "include/player_pd.h"
+#include "../gamepd/include/player_pd.h"
 
-#include "include/ball_pd.h"
+#include "../gamepd/include/ball_pd.h"
 #include "vec2.h"
 #include "math_util.h"
+#include "../bullet/include/bullet_manager.h"
 
 const struct Vec2 DRAW_DIR_BASE = {0.0f, -100.0f};
 const struct Vec2 BALL_SPEED = {0.0f, -5.0f};
@@ -34,6 +35,7 @@ void updatePlayer( PlaydateAPI *pd )
     {
         struct Vec2 vel = {0};
         rotateVec2(&BALL_SPEED, currentRad, &vel);
-        addBallPd(plPos.x, plPos.y, vel.x, vel.y);
+        //addBallPd(plPos.x, plPos.y, vel.x, vel.y);
+        addBullet(plPos.x, plPos.y, vel.x, vel.y);
     }
 }

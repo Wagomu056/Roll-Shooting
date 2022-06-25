@@ -41,14 +41,18 @@ if (TOOLCHAIN STREQUAL "armgcc")
 	add_executable(${PLAYDATE_GAME_DEVICE} ${SDK}/C_API/buildsupport/setup.c
 			src/main.c
 			src/gamepd/ball_pd.c
-			)
+			src/bullet/bullet_manager.c)
 	target_link_libraries(${PLAYDATE_GAME_DEVICE} core)
 else()
 	add_library(${PLAYDATE_GAME_NAME} SHARED ${IMAGES}
 			src/main.c
 			src/gamepd/ball_pd.c
-            src/gamepd/player_pd.c)
+			src/player/player.c
+			src/bullet/bullet_manager.c)
 	target_link_libraries(${PLAYDATE_GAME_NAME} core)
 endif()
 
+target_include_directories(${PLAYDATE_GAME_NAME}
+		PRIVATE src/core/include
+		PRIVATE src/bullet/include)
 include(${SDK}/C_API/buildsupport/playdate_game.cmake)
