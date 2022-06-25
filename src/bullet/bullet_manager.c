@@ -6,6 +6,7 @@
 #include "include/bullet.h"
 #include "defines.h"
 #include "log.h"
+#include "pd_util.h"
 
 static PlaydateAPI* _pd = NULL;
 static LCDBitmap *_ballImage = NULL;
@@ -18,7 +19,6 @@ static int _bulletWidthHalf = 0;
 static int _bulletHeight = 0;
 static int _bulletHeightHalf = 0;
 
-static LCDBitmap *loadImageAtPath(PlaydateAPI* pd, const char *path);
 static void removeBullet(int index);
 static int isOutArea(const struct Vec2* pos, int widthHalf, int heightHalf);
 
@@ -105,14 +105,3 @@ static void removeBullet(int index)
 
     LOG("Remove:%d", index);
 }
-
-static LCDBitmap *loadImageAtPath(PlaydateAPI* pd, const char *path)
-{
-    const char *outErr = NULL;
-    LCDBitmap *img = pd->graphics->loadBitmap(path, &outErr);
-    if ( outErr != NULL ) {
-        pd->system->logToConsole("Error loading image at path '%s': %s", path, outErr);
-    }
-    return img;
-}
-
