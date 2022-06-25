@@ -4,7 +4,6 @@
 
 #include "pd_api.h"
 
-#include "gamepd/include/ball_pd.h"
 #include "vec2.h"
 #include "math_util.h"
 #include "gamepd/include/player_pd.h"
@@ -18,7 +17,6 @@ static PlaydateAPI* _pd;
 
 int update(void* ud)
 {
-    //updateBallPd();
     updateBullets();
     _pd->sprite->updateAndDrawSprites();
 
@@ -35,7 +33,6 @@ int eventHandler(PlaydateAPI* pd, PDSystemEvent event, uint32_t arg)
         pd->system->setUpdateCallback(update, NULL);
 
         initBulletManager(pd);
-        initializeBallPd(pd);
     }
 
     return 0;

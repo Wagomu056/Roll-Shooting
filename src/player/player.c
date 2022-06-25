@@ -4,7 +4,6 @@
 
 #include "../gamepd/include/player_pd.h"
 
-#include "../gamepd/include/ball_pd.h"
 #include "vec2.h"
 #include "math_util.h"
 #include "../bullet/include/bullet_manager.h"
@@ -35,7 +34,6 @@ void updatePlayer( PlaydateAPI *pd )
     {
         struct Vec2 vel = {0};
         rotateVec2(&BALL_SPEED, currentRad, &vel);
-        //addBallPd(plPos.x, plPos.y, vel.x, vel.y);
         addBullet(plPos.x, plPos.y, vel.x, vel.y);
     }
 }
