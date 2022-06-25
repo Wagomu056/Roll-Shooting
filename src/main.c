@@ -4,9 +4,7 @@
 
 #include "pd_api.h"
 
-#include "vec2.h"
-#include "math_util.h"
-#include "gamepd/include/player_pd.h"
+#include "player/include/player.h"
 #include "bullet/include/bullet_manager.h"
 
 #ifdef _WINDLL

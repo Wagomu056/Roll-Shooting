@@ -2,7 +2,7 @@
 // Created by 東口拓也 on 2022/06/22.
 //
 
-#include "../gamepd/include/player_pd.h"
+#include "include/player.h"
 
 #include "vec2.h"
 #include "math_util.h"
