@@ -4,9 +4,9 @@
 
 #include "include/bullet_manager.h"
 #include "include/bullet.h"
-#include "defines.h"
 #include "log.h"
 #include "pd_util.h"
+#include "util.h"
 
 static PlaydateAPI* _pd = NULL;
 static LCDBitmap *_ballImage = NULL;
@@ -14,23 +14,21 @@ static LCDBitmap *_ballImage = NULL;
 static struct Bullet _bullets[BULLET_MAX] = {0};
 static LCDSprite *_sprites[BULLET_MAX] = {NULL};
 static int _bulletNum = 0;
-static int _bulletWidth = 0;
 static int _bulletWidthHalf = 0;
-static int _bulletHeight = 0;
 static int _bulletHeightHalf = 0;
 
 static void removeBullet(int index);
-static int isOutArea(const struct Vec2* pos, int widthHalf, int heightHalf);
 
 void initBulletManager(PlaydateAPI *pd)
 {
     _pd = pd;
-    _ballImage = loadImageAtPath(pd, "images/ball.png");
+    _ballImage = loadImageAtPath(pd, "images/bullet.png");
 
+    int w, h;
     for (int i = 0; i < BULLET_MAX; i++)
     {
         LCDSprite *sprite = _pd->sprite->newSprite();
-        _pd->graphics->getBitmapData(_ballImage, &_bulletWidth, &_bulletHeight,
+        _pd->graphics->getBitmapData(_ballImage, &w, &h,
                                      NULL, NULL, NULL);
         _pd->sprite->setImage(sprite, _ballImage, kBitmapUnflipped);
         _pd->sprite->setZIndex(sprite, 999);
@@ -38,8 +36,8 @@ void initBulletManager(PlaydateAPI *pd)
         _sprites[i] = sprite;
     }
 
-    _bulletWidthHalf = _bulletWidth / 2;
-    _bulletHeightHalf = _bulletHeight / 2;
+    _bulletWidthHalf = w / 2;
+    _bulletHeightHalf = h / 2;
 }
 
 void addBullet(float x, float y, float vx, float vy)
@@ -78,15 +76,6 @@ void updateBullets(void)
         _pd->sprite->moveTo(bullet->sprite,
                             bullet->pos.x, bullet->pos.y);
     }
-}
-
-static int isOutArea(const struct Vec2* pos, int widthHalf, int heightHalf)
-{
-    if (pos->y <= -heightHalf) return 1;
-    if (pos->y >= DISPLAY_HEIGHT + heightHalf) return 1;
-    if (pos->x <= -widthHalf) return 1;
-    if (pos->x >= DISPLAY_WIDTH + widthHalf) return 1;
-    return 0;
 }
 
 static void removeBullet(int index)
