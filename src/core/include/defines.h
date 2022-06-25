@@ -7,4 +7,8 @@
 
 #define BALL_MAX 64
 
+#define DISPLAY_WIDTH 400
+#define DISPLAY_HEIGHT 240
+
+
 #endif //BOUND_BALL_DEFINES_H

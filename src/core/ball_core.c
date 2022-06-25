@@ -26,9 +26,6 @@ struct Ball* createBall(float x, float y, float vx, float vy)
     return b;
 }
 
-static const int DISPLAY_WIDTH = 400;
-static const int DISPLAY_HEIGHT = 240;
-
 // @todo 画面外に行ったら消える
 
 static const int BALL_WIDTH = 4;//20;
