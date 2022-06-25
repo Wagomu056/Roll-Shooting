@@ -1,2 +1,6 @@
 
 .DS_Store
+.idea
+cmake-build-debug
+roll_shooting.pdx
+Source/pdex.dylib
