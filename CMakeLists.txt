@@ -54,3 +54,6 @@ target_include_directories(${PLAYDATE_GAME_NAME}
 		PRIVATE src/core/include
 		PRIVATE src/bullet/include)
 include(${SDK}/C_API/buildsupport/playdate_game.cmake)
+
+# enable debug log
+add_definitions(-DENABLE_LOG)

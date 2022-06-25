@@ -5,6 +5,7 @@
 #include "include/bullet_manager.h"
 #include "include/bullet.h"
 #include "defines.h"
+#include "log.h"
 
 static PlaydateAPI* _pd = NULL;
 static LCDBitmap *_ballImage = NULL;
@@ -101,6 +102,8 @@ static void removeBullet(int index)
     _sprites[_bulletNum - 1] = sprite;
 
     _bulletNum--;
+
+    LOG("Remove:%d", index);
 }
 
 static LCDBitmap *loadImageAtPath(PlaydateAPI* pd, const char *path)
