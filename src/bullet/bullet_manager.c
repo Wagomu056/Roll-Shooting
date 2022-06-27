@@ -7,6 +7,8 @@
 #include "log.h"
 #include "pd_util.h"
 #include "util.h"
+#include "collision_defines.h"
+#include "enemy_manager.h"
 
 static PlaydateAPI* _pd = NULL;
 static LCDBitmap *_ballImage = NULL;
@@ -32,6 +34,10 @@ void initBulletManager(PlaydateAPI *pd)
                                      NULL, NULL, NULL);
         _pd->sprite->setImage(sprite, _ballImage, kBitmapUnflipped);
         _pd->sprite->setZIndex(sprite, 999);
+
+        PDRect cr = PDRectMake(0, 0, w, h);
+        _pd->sprite->setCollideRect(sprite, cr);
+        _pd->sprite->setTag(sprite, kPlayerBullet);
 
         _sprites[i] = sprite;
     }
@@ -73,8 +79,22 @@ void updateBullets(void)
             continue;
         }
 
-        _pd->sprite->moveTo(bullet->sprite,
-                            bullet->pos.x, bullet->pos.y);
+        int len;
+        SpriteCollisionInfo *cInfo = _pd->sprite->moveWithCollisions(bullet->sprite,
+                                                                     bullet->pos.x, bullet->pos.y,
+                                                                     NULL, NULL, &len);
+        for (int i = 0; i < len; i++)
+        {
+            SpriteCollisionInfo info = cInfo[i];
+
+            if (_pd->sprite->getTag(info.other) == kEnemy)
+            {
+                removeEnemyBySprite(info.other);
+                LOG("Hit removeEnemy");
+            }
+        }
+
+        _pd->system->realloc(cInfo, 0); 	// free memory of array returned by moveWithCollisions()
     }
 }
 
@@ -91,6 +111,4 @@ static void removeBullet(int index)
     _sprites[_bulletNum - 1] = sprite;
 
     _bulletNum--;
-
-    LOG("Remove:%d", index);
 }

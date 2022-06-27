@@ -6,6 +6,7 @@
 
 #include "player/include/player.h"
 #include "bullet/include/bullet_manager.h"
+#include "enemy_manager.h"
 
 #ifdef _WINDLL
 __declspec(dllexport)
@@ -16,6 +17,7 @@ static PlaydateAPI* _pd;
 int update(void* ud)
 {
     updateBullets();
+    updateEnemies();
     _pd->sprite->updateAndDrawSprites();
 
     updatePlayer(_pd);
@@ -31,6 +33,7 @@ int eventHandler(PlaydateAPI* pd, PDSystemEvent event, uint32_t arg)
         pd->system->setUpdateCallback(update, NULL);
 
         initBulletManager(pd);
+        initEnemyManager(pd);
     }
 
     return 0;

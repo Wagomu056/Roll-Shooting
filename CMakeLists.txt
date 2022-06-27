@@ -40,13 +40,13 @@ file(GLOB IMAGES
 if (TOOLCHAIN STREQUAL "armgcc")
 	add_executable(${PLAYDATE_GAME_DEVICE} ${SDK}/C_API/buildsupport/setup.c
 			src/main.c
-			src/bullet/bullet_manager.c src/pd/pd_util.c)
+			src/bullet/bullet_manager.c src/pd/pd_util.c src/enemy/enemy_manager.c)
 	target_link_libraries(${PLAYDATE_GAME_DEVICE} core)
 else()
 	add_library(${PLAYDATE_GAME_NAME} SHARED ${IMAGES}
 			src/main.c
 			src/player/player.c
-			src/bullet/bullet_manager.c src/pd/pd_util.c)
+			src/bullet/bullet_manager.c src/pd/pd_util.c src/enemy/enemy_manager.c)
 	target_link_libraries(${PLAYDATE_GAME_NAME} core)
 endif()
 
@@ -56,6 +56,7 @@ include(${SDK}/C_API/buildsupport/playdate_game.cmake)
 target_include_directories(${PLAYDATE_GAME_NAME}
 		PRIVATE src/core/include
 		PRIVATE src/player/include
+		PRIVATE src/enemy/include
 		PRIVATE src/pd/include
 		PRIVATE src/bullet/include)
 
