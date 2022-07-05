@@ -37,3 +37,26 @@ TEST(Math, degToRad)
     float rad = degreeToRadian( 90.0f );
     EXPECT_TRUE(equalf(rad, 1.57079632679f));
 }
+
+TEST(Math, clamp)
+{
+    float value = 5;
+    value = clamp(value, 0, 10);
+    EXPECT_EQ(value, 5);
+
+    value = -1;
+    value = clamp(value, 0, 10);
+    EXPECT_EQ(value, 0);
+
+    value = 20;
+    value = clamp(value, 0, 10);
+    EXPECT_EQ(value, 10);
+
+    value = 0;
+    value = clamp(value, 0, 10);
+    EXPECT_EQ(value, 0);
+
+    value = 10;
+    value = clamp(value, 0, 10);
+    EXPECT_EQ(value, 10);
+}

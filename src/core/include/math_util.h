@@ -9,5 +9,6 @@
 
 void rotateVec2(const struct Vec2 *vec, float rad, struct Vec2 *out);
 float degreeToRadian(float degree);
+float clamp(float value, float min, float max);
 
 #endif //BOUND_BALL_MATH_UTIL_H

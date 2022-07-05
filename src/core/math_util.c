@@ -22,3 +22,12 @@ float degreeToRadian(float degree)
 {
     return degree * (M_PIF / 180.0f);
 }
+
+float clamp(float value, float min, float max)
+{
+    if (value > max)
+        return max;
+    if (value < min)
+        return min;
+    return value;
+}
