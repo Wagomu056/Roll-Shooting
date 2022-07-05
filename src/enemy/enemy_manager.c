@@ -122,8 +122,6 @@ static void removeEnemy(int index)
     _sprites[_enemyNum - 1] = sprite;
 
     _enemyNum--;
-
-    LOG("Remove enemy:%d", index);
 }
 
 int removeEnemyBySprite(const LCDSprite* sprite)

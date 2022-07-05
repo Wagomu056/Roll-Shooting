@@ -85,15 +85,13 @@ void updateBullets(void)
                                                                      NULL, NULL, &len);
         for (int i = 0; i < len; i++)
         {
-            SpriteCollisionInfo info = cInfo[i];
-
-            if (_pd->sprite->getTag(info.other) == kEnemy)
+            LCDSprite* other = cInfo[i].other;
+            if (_pd->sprite->getTag(other) == kEnemy)
             {
-                removeEnemyBySprite(info.other);
+                removeEnemyBySprite(other);
                 LOG("Hit removeEnemy");
             }
         }
-
         _pd->system->realloc(cInfo, 0); 	// free memory of array returned by moveWithCollisions()
     }
 }
