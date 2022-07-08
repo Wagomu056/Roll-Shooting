@@ -8,6 +8,7 @@
 #include "math_util.h"
 #include "../bullet/include/bullet_manager.h"
 #include "log.h"
+#include "defines.h"
 
 const struct Vec2 DRAW_DIR_BASE = {0.0f, -100.0f};
 const struct Vec2 BALL_SPEED = {0.0f, -5.0f};
@@ -67,4 +68,5 @@ void updatePlayer( PlaydateAPI *pd )
     {
         plPos.x += 5;
     }
+    plPos.x = clamp(plPos.x, 0, DISPLAY_WIDTH );
 }
